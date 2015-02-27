@@ -1,6 +1,5 @@
-# Choong-Wan Woo
 import random
-from numpy import zeros, sign, dot, power, where
+from numpy import zeros, sign
 from math import exp, log
 from collections import defaultdict
 
@@ -50,7 +49,7 @@ class Example:
 
 
 class LogReg:
-    def __init__(self, num_features, mu, step=lambda x: 0.1):
+    def __init__(self, num_features, mu, step=lambda x: 0.05):
         """
         Create a logistic regression classifier
 
@@ -98,25 +97,11 @@ class LogReg:
         :param use_tfidf: A boolean to switch between the raw data and the tfidf representation
         :return: Return the new value of the regression coefficients
         """
-	
-        y = train_example.y		      # y
-        nz_idx = train_example.nonzero.keys() # non-zero index
-        nz_idx.append(0) 		      # add the bias term
-        exp_b = exp(dot(self.beta[nz_idx],train_example.x[nz_idx]))
-	
-        lambda_step = self.step(iteration)    # step size (lambda)
-        self.last_update = {ii:self.last_update[ii]+1 
-                            for ii in xrange(len(self.beta))}
-        update = lambda_step*(y-(exp_b/(1+exp_b)))*train_example.x[nz_idx]
-	
-        # regularization
-        regul = power(1-(2*lambda_step*self.mu), self.last_update.values())
-        self.beta[nz_idx] = (self.beta[nz_idx] + update)*regul[nz_idx]
-	
-        for ii in nz_idx: # resetting the regularization values 
-            self.last_update[ii] = 0
-        
+
+        # TODO: Implement updates in this function
+
         return self.beta
+
 
 def read_dataset(positive, negative, vocab, test_proportion=.1):
     """
@@ -151,7 +136,7 @@ def read_dataset(positive, negative, vocab, test_proportion=.1):
 def step_update(iteration):
     # TODO (extra credit): Update this function to provide an
     # effective iteration dependent step size
-    return 2/(iteration**0.5)
+    return 1.0
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
@@ -167,8 +152,6 @@ if __name__ == "__main__":
                            type=str, default="../data/hockey_baseball/vocab", required=False)
     argparser.add_argument("--passes", help="Number of passes through train",
                            type=int, default=1, required=False)
-    argparser.add_argument("--var_step", help="Update the learning rate over iterations",
-			   type=bool, default=False, required=False)
 
     args = argparser.parse_args()
     train, test, vocab = read_dataset(args.positive, args.negative, args.vocab)
@@ -176,10 +159,7 @@ if __name__ == "__main__":
     print("Read in %i train and %i test" % (len(train), len(test)))
 
     # Initialize model
-    if args.var_step:
-        lr = LogReg(len(vocab), args.mu, lambda x: step_update(x))
-    else:
-        lr = LogReg(len(vocab), args.mu, lambda x: args.step)
+    lr = LogReg(len(vocab), args.mu, lambda x: args.step)
 
     # Iterations
     update_number = 0

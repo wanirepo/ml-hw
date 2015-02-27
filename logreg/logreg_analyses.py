@@ -1,4 +1,3 @@
-# Choong-Wan Woo
 import random
 from numpy import zeros, sign, dot, power, where
 from math import exp, log
@@ -99,23 +98,19 @@ class LogReg:
         :return: Return the new value of the regression coefficients
         """
 	
-        y = train_example.y		      # y
-        nz_idx = train_example.nonzero.keys() # non-zero index
-        nz_idx.append(0) 		      # add the bias term
-        exp_b = exp(dot(self.beta[nz_idx],train_example.x[nz_idx]))
+	y = train_example.y		      # y
+	nz_idx = train_example.nonzero.keys() # non-zero index
+	nz_idx.append(0) 		      # add the bias term
+	exp_b = exp(dot(self.beta[nz_idx],train_example.x[nz_idx]))
 	
-        lambda_step = self.step(iteration)    # step size (lambda)
-        self.last_update = {ii:self.last_update[ii]+1 
-                            for ii in xrange(len(self.beta))}
-        update = lambda_step*(y-(exp_b/(1+exp_b)))*train_example.x[nz_idx]
-	
-        # regularization
-        regul = power(1-(2*lambda_step*self.mu), self.last_update.values())
-        self.beta[nz_idx] = (self.beta[nz_idx] + update)*regul[nz_idx]
-	
-        for ii in nz_idx: # resetting the regularization values 
-            self.last_update[ii] = 0
-        
+	lambda_step = self.step(iteration)    # step size (lambda)
+	#print 'lambda_step:' + repr(lambda_step)
+	self.last_update = {ii:self.last_update[ii]+1 for ii in xrange(len(self.beta))}
+	update = lambda_step*(y-(exp_b/(1+exp_b)))*train_example.x[nz_idx]
+	regul = power(1-(2*lambda_step*self.mu), self.last_update.values())
+	self.beta[nz_idx] = (self.beta[nz_idx] + update)*regul[nz_idx]
+	for ii in nz_idx:
+	    self.last_update[ii] = 0
         return self.beta
 
 def read_dataset(positive, negative, vocab, test_proportion=.1):
@@ -177,9 +172,9 @@ if __name__ == "__main__":
 
     # Initialize model
     if args.var_step:
-        lr = LogReg(len(vocab), args.mu, lambda x: step_update(x))
+	lr = LogReg(len(vocab), args.mu, lambda x: step_update(x))
     else:
-        lr = LogReg(len(vocab), args.mu, lambda x: args.step)
+    	lr = LogReg(len(vocab), args.mu, lambda x: args.step)
 
     # Iterations
     update_number = 0
@@ -191,5 +186,14 @@ if __name__ == "__main__":
             if update_number % 5 == 1:
                 train_lp, train_acc = lr.progress(train)
                 ho_lp, ho_acc = lr.progress(test)
-                print("Update %i\tTP %f\tHP %f\tTA %f\tHA %f" %
-                      (update_number, train_lp, ho_lp, train_acc, ho_acc))
+                #print("Update %i\tTP %f\tHP %f\tTA %f\tHA %f" %
+                #      (update_number, train_lp, ho_lp, train_acc, ho_acc))
+		print("%f\t%f" % (train_acc, ho_acc))
+    print 'best word for base:' + vocab[lr.beta.argmax()]
+    base = where(lr.beta>0)
+    base = base[0]
+    print 'worst word for base:' + vocab[base[lr.beta[base].argmin()]]
+    print 'best word for hockey:' + vocab[lr.beta.argmin()]
+    hockey = where(lr.beta<0)
+    hockey = hockey[0]
+    print 'worst word for base:' + vocab[hockey[lr.beta[hockey].argmax()]]

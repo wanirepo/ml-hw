@@ -52,14 +52,16 @@ class Knearest:
 
         :param item_indices: The indices of the k nearest neighbors
         """
-	assert len(item_indices) == self._k, "Did not get k inputs"
-	
+
 	# Finish this function to return the most common y value for
 	# these indices
 	
-	c = Counter(self._y[item_indices])
-	whmax = [xx[0] for xx in c.most_common() if xx[1]==max(c.values())]
-	return median(whmax)
+	b = Counter(self._y[item_indices])
+	vals = numpy.array(b.values())
+	keys = numpy.array(b.keys())
+	whmax = [i for i,j in enumerate(vals) if j == max(vals)]
+		
+	return median(keys[whmax])
 
     def classify(self, example):
         """
@@ -89,13 +91,15 @@ class Knearest:
         # mislabeled examples.  You'll need to call the classify
         # function for each example.
 
-	d = defaultdict(dict)
-	d = {xx:{yy:0 for yy in xrange(10)} for xx in xrange(10)}
+        d = defaultdict(dict)
+	for x in xrange(10):
+	    for y in xrange(10):
+		d[x][y] = 0
 
         data_index = 0
         for xx, yy in zip(test_x, test_y):
 	    if self.classify(xx) == round(self.classify(xx)):
-		d[yy][self.classify(xx)] += 1
+            	d[yy][self.classify(xx)] += 1
 	    
             if data_index % 100 == 0:
 	        print("%i/%i for confusion matrix" % (data_index, len(test_x)))

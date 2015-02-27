@@ -1,6 +1,3 @@
-# Choong-Wan Woo: CU_chwo9116 (Kaggle username)
-# additional package used: re, nltk (word_tokenize, WordNetLemmatizer)
-
 from csv import DictReader, DictWriter
 
 import re
@@ -39,7 +36,7 @@ class Featurizer:
             print("%s: %s" % (category, " ".join(feature_names[top10])))
 
 def remove_spec(str):
-    punctuation = re.compile(r'[,.?!|0-9]')
+    punctuation = re.compile(r'[-.?!|0-9]')
     str = punctuation.sub('', str)
 
     return str
