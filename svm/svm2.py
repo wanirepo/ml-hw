@@ -1,7 +1,5 @@
 import argparse
-from collections import Counter, defaultdict
 
-import random
 import numpy as np
 from sklearn import svm
 import matplotlib.cm as cm
