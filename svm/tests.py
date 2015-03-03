@@ -13,20 +13,21 @@ class TestSVM(unittest.TestCase):
     def test_wide_slack(self):
         w = array([-.25, .25])
         b = -.25
+        #print find_slack(self.insep_x, self.insep_y, w, b) #me
         self.assertEqual(find_slack(self.insep_x, self.insep_y, w, b),
                          set([6, 4]))
 
     def test_narrow_slack(self):
         w = array([0, 2])
         b = -5
-
+        #print find_slack(self.insep_x, self.insep_y, w, b) #me
         self.assertEqual(find_slack(self.insep_x, self.insep_y, w, b),
                          set([3, 5]))
 
     def test_support(self):
         w = array([0.2, 0.8])
         b = -0.2
-
+        #print find_support(self.sep_x, self.sep_y, w, b) #me
         self.assertEqual(find_support(self.sep_x, self.sep_y, w, b),
                          set([0, 4, 2]))
 

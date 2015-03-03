@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.30)  20 FEB 2015 05:03
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.30)  2 MAR 2015 16:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -879,6 +879,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
 File: Figure1.pdf Graphic file (type QTm)
 <use  "Figure1.pdf" >
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+
 Overfull \hbox (7.97643pt too wide) in paragraph at lines 85--87
 []| \EU1/lmr/bx/n/10.95 Problem 2.4. [] 
  []
@@ -897,6 +902,11 @@ File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 ]
 File: Figure2.pdf Graphic file (type QTm)
  <use  "Figure2.pdf" >
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
+
+ []
+
+
 Overfull \hbox (7.97643pt too wide) in paragraph at lines 99--101
 []| \EU1/lmr/bx/n/10.95 Problem 2.6. [] 
  []
@@ -912,21 +922,115 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--101
  []
 
 [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
+
+ []
+
+
+Overfull \hbox (7.97643pt too wide) in paragraph at lines 123--125
+[]| \EU1/lmr/bx/n/10.95 Problem 3.5. [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
+
+ []
+
+
+Overfull \hbox (14.27267pt too wide) in paragraph at lines 135--137
+[]| \EU1/lmr/bx/n/10.95 Problem 3.12. [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--137
+
+ []
+
+[3]
+File: Figure3_12_ela.pdf Graphic file (type QTm)
+ <use  "Figure3_12_ela.pdf" >
+Overfull \hbox (40.76949pt too wide) in paragraph at lines 141--145
+ []|  [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--153
+
+ []
+
+[4]
+File: Figure3_13.pdf Graphic file (type QTm)
+ <use  "Figure3_13.pdf" >
+Overfull \hbox (14.27267pt too wide) in paragraph at lines 163--165
+[]| \EU1/lmr/bx/n/10.95 Problem 3.19. [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--165
+
+ []
+
+
+Overfull \hbox (38.03494pt too wide) in paragraph at lines 170--170
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--176
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
+
+ []
+
+[6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 220.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 220.
  (./HW4.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 134.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 134.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 134.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 220.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 220.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 220.
  ) 
 Here is how much of TeX's memory you used:
- 24165 strings out of 493938
- 460306 string characters out of 6148857
- 510367 words of memory out of 5000000
- 27264 multiletter control sequences out of 15000+600000
+ 24169 strings out of 493938
+ 460370 string characters out of 6148857
+ 511367 words of memory out of 5000000
+ 27266 multiletter control sequences out of 15000+600000
  7493 words of font info for 37 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 37i,10n,40p,576b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,40p,1054b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on HW4.pdf (3 pages).
+Output written on HW4.pdf (7 pages).
