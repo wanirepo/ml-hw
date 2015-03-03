@@ -56,9 +56,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     data = Numbers("../data/mnist.pkl.gz")    
-    #print("Done loading data")
-
-    clf = svm.SVC(C=args.C, kernel=args.kernel, degree=args.degree, coef0=args.coef0, gamma=args.gamma)
+    
+    clf = svm.SVC(C=args.C, kernel=args.kernel, degree=args.degree, 
+                  coef0=args.coef0, gamma=args.gamma)
     if args.limit > 0:
         print("Data limit: %i" % args.limit)
         clf.fit(data.train_x[:args.limit], data.train_y[:args.limit])
@@ -67,22 +67,34 @@ if __name__ == "__main__":
 
     predicted_y = clf.predict(data.test_x)
     acc = float(sum(predicted_y==data.test_y))/float(len(data.test_y))*100
-    print("**BASIC SETTINGS **********************")
-    print "C: "+ repr(args.C) + ", kernel: " + args.kernel
-    if args.kernel != 'linear':
-        print("**ADDITIONAL SETTINGS **********************")
-        print "degree: " + repr(args.degree) + ", gamma: "+ repr(args.gamma) + ", coef0: " + repr(args.coef0)
+    if args.kernel == 'linear':    
+        print "C: "+ repr(args.C) + ", kernel: " + args.kernel
+    else:
+        print "C: "+ repr(args.C) + ", kernel: " + args.kernel + ", degree: " + repr(args.degree) + ", gamma: "+ repr(args.gamma) + ", coef0: " + repr(args.coef0)
 
-    print("**PERFORMANCE **********************")
     print("accuracy = %.2f%% ***************" %acc)
 
     if args.sv_examples:
+        plt.subplot(221)
 	idx_3 = np.where(data.train_y[clf.support_]==3)
-        im3 = plt.imshow(data.train_x[idx_3[0][0]].reshape((28,28)), cmap=cm.gray, interpolation='nearest')
+	train_sv = data.train_x[clf.support_]
+        im3 = plt.imshow(train_sv[idx_3[0][0]].reshape((28,28)), 
+                         cmap=cm.gray, interpolation='nearest')
 	plt.show(im3)
+	plt.subplot(222)
+	im3_2 = plt.imshow(train_sv[idx_3[0][10]].reshape((28,28)), 
+                         cmap=cm.gray, interpolation='nearest')
+	plt.show(im3_2)
+	plt.subplot(223)
 	idx_8 = np.where(data.train_y[clf.support_]==8)
-        im8 = plt.imshow(data.train_x[idx_8[0][-1]].reshape((28,28)), cmap=cm.gray, interpolation='nearest')
+        im8 = plt.imshow(train_sv[idx_8[0][-1]].reshape((28,28)), 
+                         cmap=cm.gray, interpolation='nearest')
 	plt.show(im8)
+	plt.subplot(224)
+	idx_8 = np.where(data.train_y[clf.support_]==8)
+        im8_2 = plt.imshow(train_sv[idx_8[0][-10]].reshape((28,28)), 
+                         cmap=cm.gray, interpolation='nearest')
+	plt.show(im8_2)
 	
 
 
