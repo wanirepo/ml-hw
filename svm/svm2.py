@@ -4,6 +4,8 @@ from collections import Counter, defaultdict
 import random
 import numpy as np
 from sklearn import svm
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
 
 class Numbers:
     """
@@ -48,10 +50,13 @@ if __name__ == "__main__":
                         help="Independent term in kernel function. It is only significant in poly and sigmoid")
     parser.add_argument('--limit', type=int, default=-1,
                         help="Restrict training to this many examples")
+    parser.add_argument('--sv_examples', type=bool, default=False,
+                        help="For analysis 3")
+
     args = parser.parse_args()
 
     data = Numbers("../data/mnist.pkl.gz")    
-    print("Done loading data")
+    #print("Done loading data")
 
     clf = svm.SVC(C=args.C, kernel=args.kernel, degree=args.degree, coef0=args.coef0, gamma=args.gamma)
     if args.limit > 0:
@@ -62,10 +67,22 @@ if __name__ == "__main__":
 
     predicted_y = clf.predict(data.test_x)
     acc = float(sum(predicted_y==data.test_y))/float(len(data.test_y))*100
-    print("**SETTINGS **********************")
-    print "C: "+ repr(args.C) + ", kernel: " + args.kernel + ", degree: " + repr(args.degree)
-    print "gamma: "+ repr(args.gamma) + ", coef0: " + repr(args.coef0)
-    print("**Accuracy = %.2f%% ***************" %acc)
+    print("**BASIC SETTINGS **********************")
+    print "C: "+ repr(args.C) + ", kernel: " + args.kernel
+    if args.kernel != 'linear':
+        print("**ADDITIONAL SETTINGS **********************")
+        print "degree: " + repr(args.degree) + ", gamma: "+ repr(args.gamma) + ", coef0: " + repr(args.coef0)
 
+    print("**PERFORMANCE **********************")
+    print("accuracy = %.2f%% ***************" %acc)
+
+    if args.sv_examples:
+	idx_3 = np.where(data.train_y[clf.support_]==3)
+        im3 = plt.imshow(data.train_x[idx_3[0][0]].reshape((28,28)), cmap=cm.gray, interpolation='nearest')
+	plt.show(im3)
+	idx_8 = np.where(data.train_y[clf.support_]==8)
+        im8 = plt.imshow(data.train_x[idx_8[0][-1]].reshape((28,28)), cmap=cm.gray, interpolation='nearest')
+	plt.show(im8)
+	
 
 
